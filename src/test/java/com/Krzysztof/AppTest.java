@@ -62,4 +62,19 @@ public class AppTest
 
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void checkIfCorrectNumbersOfAllKindOfSignReturnTrue() {
+
+        BracketChecker stub = new BracketChecker();
+        String testString = "My test [string] to check {} all kinds of{}{}{} ()()() sig(ns) [][ ]correctl{y} ";
+
+        boolean expected = true;
+
+        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+
 }

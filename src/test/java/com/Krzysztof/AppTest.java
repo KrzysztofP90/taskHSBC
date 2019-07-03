@@ -152,5 +152,18 @@ public class AppTest
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void checkIfFirstCloseSignBeforeOpenInDiffrentKindOfSignsReturnFalse()  throws BracketChecker.BadInputException{
+
+        BracketChecker stub = new BracketChecker();
+        String testString = "My test [string] }{ to )(check br][ackets ";
+
+        boolean expected = false;
+
+        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
+
+        Assert.assertEquals(expected, actual);
+    }
+
 
 }

@@ -9,6 +9,8 @@ public class BracketChecker {
     private final char openParenthes = '(';
     private final char closeParenthes = ')';
 
+    boolean closeOpenDangerFlag = false;
+
     public boolean areBracketsMatchedAndNestedCorrectly(String textToCheck) {
 
         int countOfBrackets = 0;
@@ -31,6 +33,10 @@ public class BracketChecker {
                 break;
                 case closeParenthes: countOfParenthes --;
             }
+            if (countOfBraces == -1 || countOfBrackets == -1 || countOfParenthes == -1) {
+                return false;
+            }
+
         }
         if (countOfBrackets == 0 && countOfBraces == 0 && countOfParenthes == 0) {
             return true;

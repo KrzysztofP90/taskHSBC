@@ -101,4 +101,32 @@ public class AppTest
 
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void checkIfUncorrectNumbersOfParentehesesReturnFalse() {
+
+        BracketChecker stub = new BracketChecker();
+        String testString = "My test (string) to check () all kinds of ())() sig(ns)correctly ";
+
+        boolean expected = false;
+
+        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkIfCorrectNumbersOfParentehesesReturnTrue() {
+
+        BracketChecker stub = new BracketChecker();
+        String testString = "My test (string) to check () all kinds of ()() sig(ns)correctly ";
+
+        boolean expected = true;
+
+        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+
 }

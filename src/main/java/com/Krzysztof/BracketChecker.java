@@ -10,10 +10,10 @@ public class BracketChecker {
     private final char closeParenthes = ')';
 
 
-    public boolean areBracketsMatchedAndNestedCorrectly(String textToCheck) {
+    public boolean areBracketsMatchedAndNestedCorrectly(String textToCheck) throws BadInputException {
 
-        if (textToCheck == null) {
-            return false;
+        if (textToCheck == null || textToCheck == "") {
+            throw new BadInputException();
         }
         int countOfBrackets = 0;
         int countOfBraces = 0;
@@ -43,5 +43,10 @@ public class BracketChecker {
         if (countOfBrackets == 0 && countOfBraces == 0 && countOfParenthes == 0) {
             return true;
         } else return false;
+    }
+
+    class BadInputException extends Exception {
+
+
     }
 }

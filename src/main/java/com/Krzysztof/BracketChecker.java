@@ -9,7 +9,6 @@ public class BracketChecker {
     private final char openParenthes = '(';
     private final char closeParenthes = ')';
 
-    boolean closeOpenDangerFlag = false;
 
     public boolean areBracketsMatchedAndNestedCorrectly(String textToCheck) {
 

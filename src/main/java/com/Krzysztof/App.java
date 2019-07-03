@@ -8,6 +8,6 @@ public class App
         System.out.println( "Hello HSBC!" );
         BracketChecker checker = new BracketChecker();
 
-        System.out.println(checker.areBracketsMatchedAndNestedCorrectly("my tes(st dsa)())("));
+        System.out.println(checker.areBracketsMatchedAndNestedCorrectly("my tes(st dsa){}[]()()"));
     }
 }

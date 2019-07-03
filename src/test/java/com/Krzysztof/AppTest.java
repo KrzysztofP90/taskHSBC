@@ -89,4 +89,16 @@ public class AppTest
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void checkIfInputIsEmptyStringReturnTrue() {
+
+        BracketChecker stub = new BracketChecker();
+        String testString = "";
+
+        boolean expected = true;
+
+        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
+
+        Assert.assertEquals(expected, actual);
+    }
 }

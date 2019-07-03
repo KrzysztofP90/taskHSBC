@@ -17,7 +17,7 @@ public class AppTest
     public void checkIfCorrectNumberOfBracketsReturnTrue() {
 
         BracketChecker stub = new BracketChecker();
-        String testString = "My test (string) to check br()ackets ";
+        String testString = "My test [string] to check br[]ackets ";
         boolean expected = true;
 
         boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
@@ -29,7 +29,20 @@ public class AppTest
     public void checkIfUnCorrectNumberOfBracketsReturnFalse() {
 
         BracketChecker stub = new BracketChecker();
-        String testString = "My test (string) to check br(ackets ";
+        String testString = "My test [string] to check br[ackets ";
+        boolean expected = false;
+
+        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkIfFirstCloseSignBeforeOpenSignReturnFalse() {
+
+        BracketChecker stub = new BracketChecker();
+        String testString = "My test [string] to check br][ackets ";
+
         boolean expected = false;
 
         boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);

@@ -8,12 +8,16 @@ public class BracketChecker {
     private final char closeBrace = '}';
     private final char openParenthes = '(';
     private final char closeParenthes = ')';
+    private String textToCheck;
 
+    public BracketChecker(String textToCheck) {
+        this.textToCheck = textToCheck;
+    }
 
-    public boolean areBracketsMatchedAndNestedCorrectly(String textToCheck) throws BadInputException {
+    public boolean areBracketsMatchedAndNestedCorrectly()  {
 
         if (textToCheck == null || textToCheck.equals("")) {
-            throw new BadInputException();
+            return false;
         }
         int countOfBrackets = 0;
         int countOfBraces = 0;

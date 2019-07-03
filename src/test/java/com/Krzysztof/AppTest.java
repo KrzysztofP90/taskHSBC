@@ -9,161 +9,127 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
+import org.junit.Ignore;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 /**
  * Unit test for simple App.
  */
 public class AppTest 
 {
 
-    @Test
-    public void checkIfCorrectNumberOfBracketsReturnTrue() throws BracketChecker.BadInputException {
 
-        BracketChecker stub = new BracketChecker();
-        String testString = "My test [string] to check br[]ackets ";
-        boolean expected = true;
 
-        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
-
-        Assert.assertEquals(expected, actual);
-    }
 
     @Test
-    public void checkIfUnCorrectNumberOfBracketsReturnFalse() throws BracketChecker.BadInputException {
-
-        BracketChecker stub = new BracketChecker();
-        String testString = "My test [string] to check br[ackets ";
-        boolean expected = false;
-
-        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
-
-        Assert.assertEquals(expected, actual);
+    public void testPairedSquareBrackets() {
+        BracketChecker bracketChecker = new BracketChecker("[]");
+        assertTrue(bracketChecker.areBracketsMatchedAndNestedCorrectly());
     }
+
 
     @Test
-    public void checkIfFirstCloseSignBeforeOpenSignReturnFalse()  throws BracketChecker.BadInputException{
-
-        BracketChecker stub = new BracketChecker();
-        String testString = "My test [string] to check br][ackets ";
-
-        boolean expected = false;
-
-        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
-
-        Assert.assertEquals(expected, actual);
+    public void testEmptyString() {
+        BracketChecker bracketChecker = new BracketChecker("");
+        assertTrue(bracketChecker.areBracketsMatchedAndNestedCorrectly());
     }
 
-    @Test (expected = BracketChecker.BadInputException.class)
-    public void checkIfArgWillBeNullNpExceptionThrowsBadInputExcpetion() throws BracketChecker.BadInputException {
-
-        BracketChecker stub = new BracketChecker();
-        String testString = null;
-
-        boolean expected = false;
-
-        stub.areBracketsMatchedAndNestedCorrectly(testString);
-    }
 
     @Test
-    public void checkIfCorrectNumbersOfAllKindOfSignReturnTrue() throws BracketChecker.BadInputException{
-
-        BracketChecker stub = new BracketChecker();
-        String testString = "My test [string] to check {} all kinds of{}{}{} ()()() sig(ns) [][ ]correctl{y} ";
-
-        boolean expected = true;
-
-        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
-
-        Assert.assertEquals(expected, actual);
+    public void testUnpairedBrackets() {
+        BracketChecker bracketChecker = new BracketChecker("[[");
+        assertFalse(bracketChecker.areBracketsMatchedAndNestedCorrectly());
     }
+
 
     @Test
-    public void checkIfUncorrectNumbersOfAllKindOfSignReturnFalse() throws BracketChecker.BadInputException {
-
-        BracketChecker stub = new BracketChecker();
-        String testString = "My test [string] to check {} all kinds of{}{{} ())() sig(ns) ][ ]correctl{y} ";
-
-        boolean expected = false;
-
-        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
-
-        Assert.assertEquals(expected, actual);
+    public void testIncorrectlyOrderedBrackets() {
+        BracketChecker bracketChecker = new BracketChecker("}{");
+        assertFalse(bracketChecker.areBracketsMatchedAndNestedCorrectly());
     }
 
-    @Test (expected = BracketChecker.BadInputException.class)
-    public void checkIfInputIsEmptyStringThrowBadInputException() throws BracketChecker.BadInputException {
-
-        BracketChecker stub = new BracketChecker();
-        String testString = "";
-
-        boolean expected = true;
-        stub.areBracketsMatchedAndNestedCorrectly(testString);
-
-    }
 
     @Test
-    public void checkIfUncorrectNumbersOfParentehesesReturnFalse() throws BracketChecker.BadInputException {
-
-        BracketChecker stub = new BracketChecker();
-        String testString = "My test (string) to check () all kinds of ())() sig(ns)correctly ";
-
-        boolean expected = false;
-
-        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
-
-        Assert.assertEquals(expected, actual);
+    public void testSingleOpenBracketWithIncorrectClosingBracket() {
+        BracketChecker bracketChecker = new BracketChecker("{]");
+        assertFalse(bracketChecker.areBracketsMatchedAndNestedCorrectly());
     }
+
 
     @Test
-    public void checkIfCorrectNumbersOfParentehesesReturnTrue() throws BracketChecker.BadInputException{
-
-        BracketChecker stub = new BracketChecker();
-        String testString = "My test (string) to check () all kinds of ()() sig(ns)correctly ";
-
-        boolean expected = true;
-
-        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
-
-        Assert.assertEquals(expected, actual);
+    public void testPairedBracketsWithWhitespace() {
+        BracketChecker bracketChecker = new BracketChecker("{ }");
+        assertTrue(bracketChecker.areBracketsMatchedAndNestedCorrectly());
     }
+
 
     @Test
-    public void checkIfUncorrectNumbersOfBracesReturnFalse() throws BracketChecker.BadInputException {
-
-        BracketChecker stub = new BracketChecker();
-        String testString = "My test {string} to check {} all kinds of {}sig{correctly ";
-
-        boolean expected = false;
-
-        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
-
-        Assert.assertEquals(expected, actual);
+    public void testPartiallyPairedBrackets() {
+        BracketChecker bracketChecker = new BracketChecker("{[])");
+        assertFalse(bracketChecker.areBracketsMatchedAndNestedCorrectly());
     }
+
 
     @Test
-    public void checkIfCorrectNumbersOfBracesReturnTrue() throws BracketChecker.BadInputException {
-
-        BracketChecker stub = new BracketChecker();
-        String testString = "My test (string) to check () all kinds of ()() sig(ns)correctly ";
-
-        boolean expected = true;
-
-        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
-
-        Assert.assertEquals(expected, actual);
+    public void testSimpleNestedBrackets() {
+        BracketChecker bracketChecker = new BracketChecker("{[]}");
+        assertTrue(bracketChecker.areBracketsMatchedAndNestedCorrectly());
     }
+
 
     @Test
-    public void checkIfFirstCloseSignBeforeOpenInDiffrentKindOfSignsReturnFalse()  throws BracketChecker.BadInputException{
-
-        BracketChecker stub = new BracketChecker();
-        String testString = "My test [string] }{ to )(check br][ackets ";
-
-        boolean expected = false;
-
-        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
-
-        Assert.assertEquals(expected, actual);
+    public void testSeveralPairedBrackets() {
+        BracketChecker bracketChecker = new BracketChecker("{}[]");
+        assertTrue(bracketChecker.areBracketsMatchedAndNestedCorrectly());
     }
+
+
+    @Test
+    public void testPairedAndNestedBrackets() {
+        BracketChecker bracketChecker = new BracketChecker("([{}({}[])])");
+        assertTrue(bracketChecker.areBracketsMatchedAndNestedCorrectly());
+    }
+
+
+    @Test
+    public void testUnopenedClosingBracket() {
+        BracketChecker bracketChecker = new BracketChecker("{[)][]}");
+        assertFalse(bracketChecker.areBracketsMatchedAndNestedCorrectly());
+    }
+
+
+    @Test
+    public void testUnpairedAndNestedBracket() {
+        BracketChecker bracketChecker = new BracketChecker("([{])");
+        assertFalse(bracketChecker.areBracketsMatchedAndNestedCorrectly());
+    }
+
+
+    @Test
+    public void testPairedAndIncorrectlyNestedBrackets() {
+        BracketChecker bracketChecker = new BracketChecker("[({]})");
+        assertFalse(bracketChecker.areBracketsMatchedAndNestedCorrectly());
+    }
+
+
+    @Test
+    public void testValidMathExpression() {
+        BracketChecker bracketChecker = new BracketChecker("(((185 + 223.85) * 15) - 543)/2");
+        assertTrue(bracketChecker.areBracketsMatchedAndNestedCorrectly());
+    }
+
+
+    @Test
+    public void testValidComplexLaTeXExpression() {
+        BracketChecker bracketChecker = new BracketChecker(
+                "\\left(\\begin{array}{cc} \\frac{1}{3} & x\\\\ \\mathrm{e}^{x} &... x^2 \\end{array}\\right)");
+
+        assertTrue(bracketChecker.areBracketsMatchedAndNestedCorrectly());
+    }
+
 
 
 }

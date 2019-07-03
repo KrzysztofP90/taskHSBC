@@ -12,7 +12,7 @@ public class BracketChecker {
 
     public boolean areBracketsMatchedAndNestedCorrectly(String textToCheck) throws BadInputException {
 
-        if (textToCheck == null || textToCheck == "") {
+        if (textToCheck == null || textToCheck.equals("")) {
             throw new BadInputException();
         }
         int countOfBrackets = 0;
@@ -34,6 +34,7 @@ public class BracketChecker {
                 case openParenthes: countOfParenthes ++;
                 break;
                 case closeParenthes: countOfParenthes --;
+                break;
             }
             if (countOfBraces == -1 || countOfBrackets == -1 || countOfParenthes == -1) {
                 return false;

@@ -49,4 +49,17 @@ public class AppTest
 
         Assert.assertEquals(expected, actual);
     }
+
+    @Test
+    public void checkIfArgWillBeNullNpExceptionReturnFalse() {
+
+        BracketChecker stub = new BracketChecker();
+        String testString = null;
+
+        boolean expected = false;
+
+        boolean actual = stub.areBracketsMatchedAndNestedCorrectly(testString);
+
+        Assert.assertEquals(expected, actual);
+    }
 }

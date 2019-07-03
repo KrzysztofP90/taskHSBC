@@ -12,6 +12,9 @@ public class BracketChecker {
 
     public boolean areBracketsMatchedAndNestedCorrectly(String textToCheck) {
 
+        if (textToCheck == null) {
+            return false;
+        }
         int countOfBrackets = 0;
         int countOfBraces = 0;
         int countOfParenthes = 0;
